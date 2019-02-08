@@ -18,22 +18,32 @@ arguments:
       $(inputs.chr_list.path) |
       xargs -ICH -P 4
       sh -c
-      'bcftools mpileup --output /dev/stdout --fasta-ref $(inputs.reference_fasta.path) -r CH -T $(inputs.snp_bed.path) $(inputs.input_align.path) > $(inputs.input_align.basename).pileup.vcf' &&
+      'bcftools mpileup --output /dev/stdout --fasta-ref $(inputs.reference_fasta.path) -r CH -T $(inputs.snp_bed.path) $(inputs.input_align.path) > $(inputs.input_align.nameroot).CH.pileup.vcf' &&
       find . -not -empty -name '*.pileup.vcf' > pileup_list.txt &&
-      vcf-concat -f pileup_list.txt > $(inputs.input_align.basename).merged.vcf
-      bcftools -c $(inputs.input_align.basename).merged.vcf > $(inputs.input_align.basename).bcf.called.vcf
+      vcf-concat -f pileup_list.txt > $(inputs.input_align.basename).merged.vcf &&
+      bcftools call -c $(inputs.input_align.nameroot).merged.vcf > $(inputs.input_align.nameroot).bcf.called.vcf
 
 
 inputs:
-  input_align: File
+  input_align:
+    type: File
+    secondaryFiles: |
+        ${
+          if (inputs.input_align.nameext == '.cram'){
+            return inputs.input_align.basename + '.crai';
+          }
+        else {
+          return inputs.input_align.basename + '.bai';
+        }
+        }
   chr_list: File
-  reference_fasta: File
+  reference_fasta:
+    type: File
+    secondaryFiles: ['.fai']
   snp_bed: File
 
 outputs:
   bcf_call:
     type: File
     outputBinding:
-      glob: "$(inputs.input_align.basename).bcf.called.vcf"
-
-
+      glob: "$(inputs.input_align.nameroot).bcf.called.vcf"
