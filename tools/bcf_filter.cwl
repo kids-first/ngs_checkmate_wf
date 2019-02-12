@@ -20,7 +20,7 @@ arguments:
       sh -c
       'bcftools mpileup --output /dev/stdout --fasta-ref $(inputs.reference_fasta.path) -r CH -T $(inputs.snp_bed.path) $(inputs.input_align.path) > $(inputs.input_align.nameroot).CH.pileup.vcf' &&
       find . -not -empty -name '*.pileup.vcf' > pileup_list.txt &&
-      vcf-concat -f pileup_list.txt > $(inputs.input_align.basename).merged.vcf &&
+      vcf-concat -f pileup_list.txt > $(inputs.input_align.nameroot).merged.vcf &&
       bcftools call -c $(inputs.input_align.nameroot).merged.vcf > $(inputs.input_align.nameroot).bcf.called.vcf
 
 
