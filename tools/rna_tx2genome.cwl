@@ -1,6 +1,6 @@
 cwlVersion: v1.0
 class: CommandLineTool
-id: bcf_filter
+id: rna_tx2genome_bam
 requirements:
   - class: ShellCommandRequirement
   - class: DockerRequirement
@@ -10,26 +10,25 @@ requirements:
     coresMin: 16
     ramMin: 24000
 
-baseCommand: [tar]
+baseCommand: [tar, -xzf]
 arguments:
   - position: 1
     shellQuote: false
     valueFrom: >-
-      -zxf $(inputs.genomeDir.path) &&
+      $(inputs.genomeDir.path) &&
       rsem-tbam2gbam
-      $(inputs.bam.path)
-      $(inputs.bam.nameroot).converted.bam
+      $(inputs.input_bam.path)
+      $(inputs.input_bam.nameroot).converted.bam
       -p 16 &&
-      samtools index $(inputs.bam.nameroot).converted.bam $(inputs.bam.nameroot).converted.bai
+      samtools index $(inputs.input_bam.nameroot).converted.bam $(inputs.input_bam.nameroot).converted.bai
 
 inputs:
-  input_bam:
-    type: File
+  input_bam: File
   genomeDir: File
 
 outputs:
   bcf_call:
     type: File
     outputBinding:
-      glob: "$(inputs.bam.nameroot).converted.bam"
+      glob: "$(inputs.input_bam.nameroot).converted.bam"
     secondaryFiles: [^.bai]
