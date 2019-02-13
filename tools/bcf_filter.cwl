@@ -33,7 +33,7 @@ inputs:
             return inputs.input_align.basename + '.crai';
           }
         else {
-          return inputs.input_align.basename + '.bai';
+          return inputs.input_align.nameroot + '.bai';
         }
         }
   chr_list: File
