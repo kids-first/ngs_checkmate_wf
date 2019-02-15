@@ -15,7 +15,7 @@ arguments:
   - position: 1
     shellQuote: false
     valueFrom: >-
-      -@ 16 -m 1500M
+      -@ 16 -m 1G
       $(inputs.input_align.path)
       > $(inputs.input_align.nameroot).sorted.bam &&
       samtools index
