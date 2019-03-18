@@ -4,7 +4,6 @@ id: bcf_call
 requirements:
   - class: ScatterFeatureRequirement
   - class: MultipleInputFeatureRequirement
-  - class: SubworkflowFeatureRequirement
 
 inputs:
   input_align: File[]
@@ -13,11 +12,11 @@ inputs:
   snp_bed: File
 
 outputs:
-  bcf_called_vcf: {type: File, outputSource: bcf_filter/output}
+  bcf_called_vcf: {type: File, outputSource: bcf_filter/bcf_call}
 
 steps:
   bcf_filter:
-    run: ../tools/bcf_call.cwl
+    run: ../tools/bcf_filter.cwl
     in:
       input_align: input_align
       chr_list: chr_list

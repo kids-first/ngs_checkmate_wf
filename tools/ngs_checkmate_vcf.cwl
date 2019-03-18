@@ -9,8 +9,10 @@ requirements:
     listing: $(inputs.input_vcf)
   - class: InlineJavascriptRequirement
   - class: ResourceRequirement
-    coresMin: 4
-    ramMin: 24000
+    coresMin: 2
+    ramMin: 
+      valueFrom: |- 
+        ${inputs.ram ? inputs.ram : 4000}
 
 baseCommand: [python]
 arguments:
@@ -30,9 +32,10 @@ inputs:
     type: File[]
   snp_bed: File
   output_basename: string
+  ram: int?
 
 outputs:
-  match_reults:
+  match_results:
     type: File
     outputBinding:
       glob: "$(inputs.output_basename)_all.txt"
