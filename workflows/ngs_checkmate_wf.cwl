@@ -6,12 +6,7 @@ requirements:
   - class: MultipleInputFeatureRequirement
 
 inputs:
-  input_vcf: 
-      type:
-        type: array
-        items: array
-            type: array
-            items: File
+  input_vcf: File[][]
   
   snp_bed: File
   output_basename: string[]
