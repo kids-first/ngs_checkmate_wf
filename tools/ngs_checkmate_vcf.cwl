@@ -9,8 +9,8 @@ requirements:
     listing: $(inputs.input_vcf)
   - class: InlineJavascriptRequirement
   - class: ResourceRequirement
-    coresMin: 4
-    ramMin: 24000
+    coresMin: 2
+    ramMin: $(inputs.ram)
 
 baseCommand: [python]
 arguments:
@@ -30,9 +30,12 @@ inputs:
     type: File[]
   snp_bed: File
   output_basename: string
+  ram:
+    type: ['null', int]
+    default: 4000
 
 outputs:
-  match_reults:
+  match_results:
     type: File
     outputBinding:
       glob: "$(inputs.output_basename)_all.txt"
