@@ -10,9 +10,7 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: ResourceRequirement
     coresMin: 2
-    ramMin: 
-      valueFrom: |- 
-        ${inputs.ram ? inputs.ram : 4000}
+    ramMin: $(inputs.ram)
 
 baseCommand: [python]
 arguments:
@@ -32,7 +30,9 @@ inputs:
     type: File[]
   snp_bed: File
   output_basename: string
-  ram: int?
+  ram:
+    type: ['null', int]
+    default: 4000
 
 outputs:
   match_results:

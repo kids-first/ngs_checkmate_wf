@@ -6,15 +6,22 @@ requirements:
   - class: MultipleInputFeatureRequirement
 
 inputs:
-  input_vcf: File[][]
+  input_vcf:
+    type:
+        type: array
+        items:
+            type: array
+            items: File
   
   snp_bed: File
   output_basename: string[]
-  ram: int?
+  ram: 
+    type: ['null', int]
+    default: 4000
 
 outputs:
-  match_results: {type: File, outputSource: ngs_checkmate/match_results}
-  correlation_matrix: {type: File, outputSource: ngs_checkmate/correlation_matrix}
+  match_results: {type: 'File[]', outputSource: ngs_checkmate/match_results}
+  correlation_matrix: {type: 'File[]', outputSource: ngs_checkmate/correlation_matrix}
 
 steps:
   ngs_checkmate:
@@ -27,7 +34,7 @@ steps:
     scatter: 
         - input_vcf
         - output_basename
-    scatterMethod: nested_crossproduct
+    scatterMethod: dotproduct
     out: [match_results, correlation_matrix]
 
 
