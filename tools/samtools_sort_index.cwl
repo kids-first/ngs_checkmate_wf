@@ -25,7 +25,6 @@ arguments:
 inputs:
   input_align: File
 
-
 outputs:
   sorted_bam:
     type: File

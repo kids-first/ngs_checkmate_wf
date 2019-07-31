@@ -23,11 +23,11 @@ arguments:
       samtools index $(inputs.input_bam.nameroot).converted.bam $(inputs.input_bam.nameroot).converted.bai
 
 inputs:
-  input_bam: File
-  genomeDir: File
+  input_bam: {type: File, doc: "Input transcriptome bam"}
+  genomeDir: {type: File, doc: "rsem tar gzipped reference"}
 
 outputs:
-  bcf_call:
+  genome_bam:
     type: File
     outputBinding:
       glob: "$(inputs.input_bam.nameroot).converted.bam"
