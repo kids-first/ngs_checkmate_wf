@@ -4,7 +4,7 @@ id: ngs_checkmate
 requirements:
   - class: ShellCommandRequirement
   - class: DockerRequirement
-    dockerPull: 'migbro/ngscheckmate:latest'
+    dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/ngscheckmate:1.3'
   - class: InitialWorkDirRequirement
     listing: $(inputs.input_vcf)
   - class: InlineJavascriptRequirement

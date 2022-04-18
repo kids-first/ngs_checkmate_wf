@@ -4,7 +4,7 @@ id: bcf_filter
 requirements:
   - class: ShellCommandRequirement
   - class: DockerRequirement
-    dockerPull: 'migbro/ngscheckmate:latest'
+    dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/ngscheckmate:1.3'
   - class: InlineJavascriptRequirement
   - class: ResourceRequirement
     coresMin: 4
