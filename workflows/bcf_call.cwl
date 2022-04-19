@@ -1,7 +1,7 @@
-cwlVersion: v1.0
+cwlVersion: v1.2
 class: Workflow
 id: bcf_call
-label: KFDRC NGSCHECKMATE Preprocess
+label: KFDRC NGS Checkmate Preprocess
 doc: |-
   # BCF Filter Tool
   Preprocessing workflow to use bcftools to subset bams and create a bcftools-called vcf
@@ -34,7 +34,8 @@ requirements:
 - class: MultipleInputFeatureRequirement
 
 inputs:
-  input_align: File[]
+  input_align: { type: 'File[]',
+  secondaryFiles: [ { pattern: "^.crai", required: false }, { pattern: ".bai", required: false }, { pattern: "^.bai", required: false } ] }
   chr_list: { type: File, "sbg:suggestedValue": { class: File,
       path: 5f50018fe4b054958bc8d2e2, name: chr_list.txt } }
   reference_fasta: { type: File, "sbg:suggestedValue": { class: File,
@@ -58,7 +59,7 @@ steps:
         valueFrom: |
           ${
             var ref = self[0];
-            var ref.secondaryFiles = [self[1]];
+            ref.secondaryFiles = [self[1]];
             return ref;
           }
       snp_bed: snp_bed

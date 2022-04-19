@@ -1,7 +1,7 @@
 cwlVersion: v1.0
 class: Workflow
 id: ngs_checkmate_wf
-label: KFDRC NGSCHECKMATE Sample QC
+label: KFDRC NGS Checkmate Sample QC
 doc: |
   # ngs checkmate workflow
 
@@ -23,8 +23,7 @@ doc: |
               type: array
               items: File
     
-    snp_bed: { type: File, "sbg:suggestedValue": { class: File,
-      path: 5f50018fe4b054958bc8d2e4, name: SNP_hg38_liftover_wChr.bed } }
+    snp_bed: File
     output_basename: string[]
     ram: 
       type: ['null', int]
@@ -52,7 +51,8 @@ inputs:
         type: array
         items: File
 
-  snp_bed: File
+  snp_bed: { type: File, "sbg:suggestedValue": { class: File,
+      path: 5f50018fe4b054958bc8d2e4, name: SNP_hg38_liftover_wChr.bed } }
   output_basename: string[]
   ram:
     type: ['null', int]
