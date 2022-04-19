@@ -1,9 +1,5 @@
 # ngs checkmate workflow
 
-<p align="center">
-  <a href="https://github.com/kids-first/ngs_checkmate_wf/blob/master/LICENSE"><img src="https://img.shields.io/github/license/kids-first/kf-template-repo.svg?style=for-the-badge"></a>
-</p>
-
 ## Introduction
 Based on the tool from https://github.com/parklab/NGSCheckMate, "NGSCheckMate uses depth-dependent correlation models of allele fractions of known single-nucleotide polymorphisms (SNPs) to identify samples from the same individual." 
 
