@@ -38,7 +38,9 @@ inputs:
   chr_list: { type: File, "sbg:suggestedValue": { class: File,
       path: 5f50018fe4b054958bc8d2e2, name: chr_list.txt } }
   reference_fasta: { type: File, "sbg:suggestedValue": { class: File,
-      path: 60639014357c3a53540ca7a3, name: Homo_sapiens_assembly38.fasta }, secondaryFiles: ['.fai'] }
+      path: 60639014357c3a53540ca7a3, name: Homo_sapiens_assembly38.fasta } }
+  reference_fai: { type: File, "sbg:suggestedValue": { class: File,
+      path: 60639016357c3a53540ca7af, name: Homo_sapiens_assembly38.fasta.fai }}
   snp_bed: { type: File, "sbg:suggestedValue": { class: File,
       path: 5f50018fe4b054958bc8d2e4, name: SNP_hg38_liftover_wChr.bed } }
 
@@ -51,7 +53,14 @@ steps:
     in:
       input_align: input_align
       chr_list: chr_list
-      reference_fasta: reference_fasta
+      reference_fasta:
+        source: [reference_fasta, reference_fai]
+        valueFrom: |
+          ${
+            var ref = self[0];
+            var ref.secondaryFiles = [self[1]];
+            return ref;
+          }
       snp_bed: snp_bed
     scatter: [input_align]
     out: [bcf_call]
