@@ -1,18 +1,53 @@
-cwlVersion: v1.0
+cwlVersion: v1.2
 class: Workflow
 id: bcf_call
+label: KFDRC NGS Checkmate Preprocess
+doc: |-
+  # BCF Filter Tool
+  Preprocessing workflow to use bcftools to subset bams and create a bcftools-called vcf
+
+  ![data service logo](https://github.com/d3b-center/d3b-research-workflows/raw/master/doc/kfdrc-logo-sm.png)
+
+  ## bcf_call.cwl
+
+  Creates input vcfs for ngs checkmate. Especially useful to run when inputs are large WGS bam files.
+
+  ### inputs
+  ```yaml
+  inputs:
+    input_align: File[]
+    chr_list: File
+    reference_fasta: File
+    snp_bed: File
+  ```
+  Suggested inputs:
+  ```text
+  chr_list: chr_list.txt
+  snp_bed: SNP_hg38_liftover_wChr.bed
+  reference_fasta: Homo_sapiens_assembly38.fasta
+  ```
+  ### outputs
+  ```yaml
+  bcf_called_vcf: {type: File[], outputSource: bcf_filter/bcf_call}
 requirements:
-  - class: ScatterFeatureRequirement
-  - class: MultipleInputFeatureRequirement
+- class: ScatterFeatureRequirement
+- class: MultipleInputFeatureRequirement
 
 inputs:
-  input_align: File[]
-  chr_list: File
-  reference_fasta: File
-  snp_bed: File
+  input_align: { type: 'File[]',
+  secondaryFiles: [ { pattern: ".crai", required: false }, { pattern: ".bai", required: false }, { pattern: "^.bai", required: false } ] }
+  chr_list: { type: File, "sbg:suggestedValue": { class: File,
+      path: 5f50018fe4b054958bc8d2e2, name: chr_list.txt } }
+  reference_fasta: { type: File, secondaryFiles: [{pattern: '.fai', required: true}],
+    "sbg:suggestedValue": { class: File,
+    path: 60639014357c3a53540ca7a3, name: Homo_sapiens_assembly38.fasta,
+    secondaryFiles: [{ class: File,
+    path: 60639016357c3a53540ca7af, name: Homo_sapiens_assembly38.fasta.fai}] } }
+  snp_bed: { type: File, "sbg:suggestedValue": { class: File,
+      path: 5f50018fe4b054958bc8d2e4, name: SNP_hg38_liftover_wChr.bed } }
 
 outputs:
-  bcf_called_vcf: {type: File, outputSource: bcf_filter/bcf_call}
+  bcf_called_vcf: {type: 'File[]', outputSource: bcf_filter/bcf_call}
 
 steps:
   bcf_filter:
@@ -29,7 +64,15 @@ steps:
 $namespaces:
   sbg: https://sevenbridges.com
 hints:
-  - class: 'sbg:AWSInstanceType'
-    value: c5.9xlarge;ebs-gp2;850
-  - class: 'sbg:maxNumberOfParallelInstances'
-    value: 4
+- class: 'sbg:AWSInstanceType'
+  value: c5.9xlarge;ebs-gp2;850
+- class: 'sbg:maxNumberOfParallelInstances'
+  value: 4
+sbg:license: Apache License 2.0
+sbg:publisher: KFDRC
+sbg:categories:
+- NGSCHECKMATE
+- PREPROCESS
+"sbg:links":
+- id: 'https://github.com/kids-first/ngs_checkmate_wf/releases/tag/v1.0.0'
+  label: github-release

@@ -1,7 +1,13 @@
 # ngs checkmate workflow
 
+<p align="center">
+  <a href="https://github.com/kids-first/ngs_checkmate_wf/blob/master/LICENSE"><img src="https://img.shields.io/github/license/kids-first/kf-template-repo.svg?style=for-the-badge"></a>
+</p>
+
 ## Introduction
 Based on the tool from https://github.com/parklab/NGSCheckMate, "NGSCheckMate uses depth-dependent correlation models of allele fractions of known single-nucleotide polymorphisms (SNPs) to identify samples from the same individual." Contains preprocessing tools and workflows, as well as a workflow for batch processing.
+
+![data service logo](https://github.com/d3b-center/d3b-research-workflows/raw/master/doc/kfdrc-logo-sm.png)
 
 ## Workflows
 
@@ -93,7 +99,7 @@ outputs:
 ```
 
 ### ngs_checkmate_vcf.cwl
-Takes an array of vcfs in which bams have been filtered using bcf tools and outupts match resutls and a correlation matrix.
+Takes an array of vcfs in which bams have been filtered using bcf tools and outputs match results and a correlation matrix.
 
 #### inputs
 ```yaml
@@ -121,7 +127,7 @@ outputs:
 ```
 
 ### rna_tx2genome.cwl
-In the rare event that your input is a transcriptome bam, this will convert to the ncessary sorted genome bam.
+In the rare event that your input is a transcriptome bam, this will convert to the necessary sorted genome bam.
 ### inputs
 ```yaml
 inputs:

@@ -1,10 +1,10 @@
-cwlVersion: v1.0
+cwlVersion: v1.2
 class: CommandLineTool
 id: bcf_filter
 requirements:
   - class: ShellCommandRequirement
   - class: DockerRequirement
-    dockerPull: 'migbro/ngscheckmate:latest'
+    dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/ngscheckmate:1.3'
   - class: InlineJavascriptRequirement
   - class: ResourceRequirement
     coresMin: 4
@@ -27,15 +27,7 @@ arguments:
 inputs:
   input_align:
     type: File
-    secondaryFiles: |
-        ${
-          if (inputs.input_align.nameext == '.cram'){
-            return inputs.input_align.basename + '.crai';
-          }
-        else {
-          return inputs.input_align.nameroot + '.bai';
-        }
-        }
+    secondaryFiles: [ { pattern: ".crai", required: false }, { pattern: ".bai", required: false }, { pattern: "^.bai", required: false } ]
   chr_list: File
   reference_fasta:
     type: File

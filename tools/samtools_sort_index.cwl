@@ -6,7 +6,7 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: ShellCommandRequirement
   - class: DockerRequirement
-    dockerPull: 'kfdrc/samtools:1.9'
+    dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/samtools:1.9'
   - class: ResourceRequirement
     coresMin: 16
 
