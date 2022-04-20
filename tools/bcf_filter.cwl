@@ -27,7 +27,7 @@ arguments:
 inputs:
   input_align:
     type: File
-    secondaryFiles: [ { pattern: "^.crai", required: false }, { pattern: ".bai", required: false }, { pattern: "^.bai", required: false } ]
+    secondaryFiles: [ { pattern: ".crai", required: false }, { pattern: ".bai", required: false }, { pattern: "^.bai", required: false } ]
   chr_list: File
   reference_fasta:
     type: File
