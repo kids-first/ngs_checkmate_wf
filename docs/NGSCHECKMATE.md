@@ -1,4 +1,4 @@
-# ngs checkmate workflow
+# NGS Checkmate Workflow
 
 ## Introduction
 Based on the tool from https://github.com/parklab/NGSCheckMate, "NGSCheckMate uses depth-dependent correlation models of allele fractions of known single-nucleotide polymorphisms (SNPs) to identify samples from the same individual." 
@@ -7,8 +7,10 @@ Based on the tool from https://github.com/parklab/NGSCheckMate, "NGSCheckMate us
 
 ### ngs_checkmate_wf.cwl
 Runs ngscheckmate in vcf mode - requires output from bcf_call step.
+Task to run this workflow is best drafted by created an input yaml file if run using cwltool, or using seven bridges api if run on CAVATICA, etc
 
 #### inputs
+`snp_bed` reference obtainable from https://cavatica.sbgenomics.com/u/kfdrc-harmonization/kf-references
 ```yaml
 inputs:
   input_vcf:
@@ -24,8 +26,8 @@ inputs:
     type: ['null', int]
     default: 4000
 ```
-1) Ram input param optional - use if you plan on batching ~20+ vcfs.
-2) `input_vcf` is an array of arrays - basically an array of groups of vcfs that you'd like ot see evaluated together.
+1) Ram in megabytes, input param optional - use if you plan on batching ~20+ vcfs.
+2) `input_vcf` is an array of arrays - basically an array of groups of vcfs that you would like ot see evaluated together.
 3) `output_basename` is an array of file output prefixes - should line up with the first level of array elements from `input_vcf`
 
 #### outputs

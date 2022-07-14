@@ -16,6 +16,7 @@ inputs:
   snp_bed: File
 ```
 Suggested inputs:
+References obtainable from https://cavatica.sbgenomics.com/u/kfdrc-harmonization/kf-references
 ```text
 chr_list: chr_list.txt
 snp_bed: SNP_hg38_liftover_wChr.bed
@@ -23,4 +24,5 @@ reference_fasta: Homo_sapiens_assembly38.fasta
 ```
 ### outputs
 ```yaml
-bcf_called_vcf: {type: File, outputSource: bcf_filter/bcf_call}
+bcf_called_vcf: {type: File[], outputSource: bcf_filter/bcf_call}
+```
