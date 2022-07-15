@@ -29,9 +29,9 @@ doc: |
     output_basename: string[]
     ram: 
       type: ['null', int]
-      default: 4000
+      default: 4
   ```
-  1) Ram in megabytes, input param optional - use if you plan on batching ~20+ vcfs.
+  1) Ram in GB, input param optional - use if you plan on batching ~20+ vcfs.
   2) `input_vcf` is an array of arrays - basically an array of groups of vcfs that you would like ot see evaluated together.
   3) `output_basename` is an array of file output prefixes - should line up with the first level of array elements from `input_vcf`
 
@@ -58,7 +58,7 @@ inputs:
   output_basename: string[]
   ram:
     type: ['null', int]
-    default: 4000
+    default: 4
 
 outputs:
   match_results: {type: 'File[]', outputSource: ngs_checkmate/match_results}
