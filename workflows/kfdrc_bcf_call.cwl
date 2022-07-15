@@ -1,6 +1,6 @@
 cwlVersion: v1.2
 class: Workflow
-id: bcf_call
+id: kfdrc_bcf_call
 label: KFDRC NGS Checkmate Preprocess
 doc: |-
   # BCF Filter Tool
@@ -21,6 +21,7 @@ doc: |-
     snp_bed: File
   ```
   Suggested inputs:
+  References obtainable from https://cavatica.sbgenomics.com/u/kfdrc-harmonization/kf-references
   ```text
   chr_list: chr_list.txt
   snp_bed: SNP_hg38_liftover_wChr.bed
@@ -29,22 +30,21 @@ doc: |-
   ### outputs
   ```yaml
   bcf_called_vcf: {type: File[], outputSource: bcf_filter/bcf_call}
+  ```
 requirements:
 - class: ScatterFeatureRequirement
 - class: MultipleInputFeatureRequirement
 
 inputs:
-  input_align: { type: 'File[]',
-  secondaryFiles: [ { pattern: ".crai", required: false }, { pattern: ".bai", required: false }, { pattern: "^.bai", required: false } ] }
-  chr_list: { type: File, "sbg:suggestedValue": { class: File,
-      path: 5f50018fe4b054958bc8d2e2, name: chr_list.txt } }
-  reference_fasta: { type: File, secondaryFiles: [{pattern: '.fai', required: true}],
-    "sbg:suggestedValue": { class: File,
-    path: 60639014357c3a53540ca7a3, name: Homo_sapiens_assembly38.fasta,
-    secondaryFiles: [{ class: File,
-    path: 60639016357c3a53540ca7af, name: Homo_sapiens_assembly38.fasta.fai}] } }
-  snp_bed: { type: File, "sbg:suggestedValue": { class: File,
-      path: 5f50018fe4b054958bc8d2e4, name: SNP_hg38_liftover_wChr.bed } }
+  input_align: {type: 'File[]', secondaryFiles: [{pattern: ".crai", required: false},
+      {pattern: ".bai", required: false}, {pattern: "^.bai", required: false}]}
+  chr_list: {type: File, "sbg:suggestedValue": {class: File, path: 5f50018fe4b054958bc8d2e2,
+      name: chr_list.txt}}
+  reference_fasta: {type: File, secondaryFiles: [{pattern: '.fai', required: true}],
+    "sbg:suggestedValue": {class: File, path: 60639014357c3a53540ca7a3, name: Homo_sapiens_assembly38.fasta,
+      secondaryFiles: [{class: File, path: 60639016357c3a53540ca7af, name: Homo_sapiens_assembly38.fasta.fai}]}}
+  snp_bed: {type: File, "sbg:suggestedValue": {class: File, path: 5f50018fe4b054958bc8d2e4,
+      name: SNP_hg38_liftover_wChr.bed}}
 
 outputs:
   bcf_called_vcf: {type: 'File[]', outputSource: bcf_filter/bcf_call}
@@ -74,5 +74,5 @@ sbg:categories:
 - NGSCHECKMATE
 - PREPROCESS
 "sbg:links":
-- id: 'https://github.com/kids-first/ngs_checkmate_wf/releases/tag/v1.0.0'
+- id: 'https://github.com/kids-first/ngs_checkmate_wf/releases/tag/v1.0.1'
   label: github-release

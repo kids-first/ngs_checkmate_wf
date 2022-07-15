@@ -10,6 +10,7 @@ Based on the tool from https://github.com/parklab/NGSCheckMate, "NGSCheckMate us
 ![data service logo](https://github.com/d3b-center/d3b-research-workflows/raw/master/doc/kfdrc-logo-sm.png)
 
 ## Workflows
+References obtainable from https://cavatica.sbgenomics.com/u/kfdrc-harmonization/kf-references
 
 ### bcf_call.cwl
 Creates input vcfs for ngs checkmate. Especially useful to run when inputs are large WGS bam files.
@@ -30,7 +31,7 @@ reference_fasta: Homo_sapiens_assembly38.fasta
 ```
 #### outputs
 ```yaml
-bcf_called_vcf: {type: File, outputSource: bcf_filter/bcf_call}
+bcf_called_vcf: {type: File[], outputSource: bcf_filter/bcf_call}
 ```
 
 ### ngs_checkmate_wf.cwl
@@ -52,7 +53,7 @@ inputs:
     type: ['null', int]
     default: 4000
 ```
-1) Ram input param optional - use if you plan on batching ~20+ vcfs.
+1) Ram in megabytes, input param optional - use if you plan on batching ~20+ vcfs.
 2) `input_vcf` is an array of arrays - basically an array of groups of vcfs that you'd like ot see evaluated together.
 3) `output_basename` is an array of file output prefixes - should line up with the first level of array elements from `input_vcf`
 

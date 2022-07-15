@@ -10,7 +10,7 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: ResourceRequirement
     coresMin: 2
-    ramMin: $(inputs.ram)
+    ramMin: ${return inputs.ram * 1000}
 
 baseCommand: [python]
 arguments:
@@ -32,7 +32,7 @@ inputs:
   output_basename: string
   ram:
     type: ['null', int]
-    default: 4000
+    default: 4
 
 outputs:
   match_results:
