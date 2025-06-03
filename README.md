@@ -1,7 +1,7 @@
 # ngs checkmate workflow
 
 <p align="center">
-  <a href="https://github.com/kids-first/ngs_checkmate_wf/blob/master/LICENSE"><img src="https://img.shields.io/github/license/kids-first/kf-template-repo.svg?style=for-the-badge"></a>
+  <a href="https://github.com/kids-first/ngs_checkmate_wf/blob/master/LICENSE"><img src="https://img.shields.io/github/license/kids-first/ngs_checkmate_wf.svg?style=for-the-badge"></a>
 </p>
 
 ## Introduction
