@@ -74,5 +74,5 @@ sbg:categories:
 - NGSCHECKMATE
 - PREPROCESS
 "sbg:links":
-- id: 'https://github.com/kids-first/ngs_checkmate_wf/releases/tag/v1.0.1'
+- id: 'https://github.com/kids-first/ngs_checkmate_wf/releases/tag/1.0.2'
   label: github-release
