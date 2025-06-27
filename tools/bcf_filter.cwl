@@ -16,9 +16,9 @@ arguments:
     shellQuote: false
     valueFrom: >-
       $(inputs.chr_list.path) |
-      xargs -ICH -P 4
+      xargs -Ichr_placeholder_108 -P 4
       sh -c
-      'bcftools mpileup --output /dev/stdout --fasta-ref $(inputs.reference_fasta.path) -r CH -T $(inputs.snp_bed.path) $(inputs.input_align.path) > $(inputs.input_align.nameroot).CH.pileup.vcf' &&
+      'bcftools mpileup --output /dev/stdout --fasta-ref $(inputs.reference_fasta.path) -r chr_placeholder_108 -T $(inputs.snp_bed.path) $(inputs.input_align.path) > $(inputs.input_align.nameroot).chr_placeholder_108.pileup.vcf' &&
       find . -not -empty -name '*.pileup.vcf' > pileup_list.txt &&
       vcf-concat -f pileup_list.txt > $(inputs.input_align.nameroot).merged.vcf &&
       bcftools call -c $(inputs.input_align.nameroot).merged.vcf > $(inputs.input_align.nameroot).bcf.called.vcf
